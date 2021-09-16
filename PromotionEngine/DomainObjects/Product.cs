@@ -8,7 +8,7 @@ namespace PromotionEngine.DomainObjects
         }
 
         public string Name { get; set; }
-        public string UnitPrice { get; set; }
+        public int UnitPrice { get; set; }
 
     }
 }

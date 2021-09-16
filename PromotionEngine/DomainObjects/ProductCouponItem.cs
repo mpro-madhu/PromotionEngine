@@ -6,5 +6,8 @@ namespace PromotionEngine.DomainObjects
         public ProductCouponItem()
         {
         }
+
+        public int CouponUnits { set; get; }
+        public Product CouponProduct { set; get; }
     }
 }

@@ -6,5 +6,8 @@ namespace PromotionEngine.DomainObjects
         public OrderItem()
         {
         }
+
+        public int Quantity { set; get; }
+        public Product ProductItem { set; get; }
     }
 }
