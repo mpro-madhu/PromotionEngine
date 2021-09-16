@@ -28,10 +28,10 @@ namespace PromotionEngine
             ProductCouponItem couponBItem = new ProductCouponItem() { CouponProduct = B, CouponUnits = 2 };
             ProductCoupon couponB = new ProductCoupon() { CouponItems = new System.Collections.Generic.List<ProductCouponItem>() { couponBItem }, CouponAmount = 45 };
 
-            //Coupon for Product B
+            //Coupon for Product CD
             ProductCouponItem couponCItem = new ProductCouponItem() { CouponProduct = C, CouponUnits = 1 };
             ProductCouponItem couponDItem = new ProductCouponItem() { CouponProduct = D, CouponUnits = 1 };
-            ProductCoupon couponCD = new ProductCoupon() { CouponItems = new System.Collections.Generic.List<ProductCouponItem>() { couponCItem,couponDItem }, CouponAmount = 45 };
+            ProductCoupon couponCD = new ProductCoupon() { CouponItems = new System.Collections.Generic.List<ProductCouponItem>() { couponCItem,couponDItem }, CouponAmount = 30 };
 
             Console.WriteLine("Intiating Promotion Engine Component");
             // Promotion Engine
@@ -73,6 +73,7 @@ namespace PromotionEngine
             order3.OrderItems = items;
             int order3Price = promoEngine.GetOrderTotal(order3);
             Console.WriteLine("Testing Scenario 3 ");
+           
             Console.WriteLine(280 == order3Price);
 
             Console.Read();

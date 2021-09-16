@@ -27,17 +27,26 @@ namespace PromotionEngine.DomainObjects
             }
             else
             {
+                // With PROMO codes
+                for (int i = 0; i < customerOrder.OrderItems.Count; i++)
+                {
+                    total = total + GetPromoPrice(customerOrder.OrderItems[i], customerOrder);
+                }
+                /*
                 foreach (OrderItem item in customerOrder.OrderItems)
                 {
-                    total = total + GetPromoPrice(item);
+                    total = total + GetPromoPrice(item,customerOrder);
                 }
+                */
 
             }
 
             return total;
         }
 
-        public int GetPromoPrice(OrderItem item)
+       
+
+        public int GetPromoPrice(OrderItem item,Order customerOrder)
         {
             
             foreach (ProductCoupon pc in _coupons)
@@ -45,15 +54,37 @@ namespace PromotionEngine.DomainObjects
                 ProductCouponItem productCouponItem = pc.CouponItems.Find(ci => ci.CouponProduct.Name == item.ProductItem.Name);
                 if (productCouponItem != null)   
                 {
+                    
                     if (pc.CouponItems.Count == 1)
                     {
+                        // Simple PROMO codes.
                         int couponUnitCount = item.Quantity / productCouponItem.CouponUnits;
                         int nonCouponUnitCount = item.Quantity % productCouponItem.CouponUnits;
                         return ((couponUnitCount * pc.CouponAmount) + (nonCouponUnitCount * item.ProductItem.UnitPrice));
                     }
                     else if (pc.CouponItems.Count > 1)
                     {
-                        // TBD
+                        // Hybrid promo codes.
+
+
+                        Dictionary<ProductCouponItem, OrderItem> counponOrderUnits = new Dictionary<ProductCouponItem, OrderItem>();
+
+                        foreach (ProductCouponItem pcItem in pc.CouponItems)
+                        {
+                            OrderItem orderItem = customerOrder.OrderItems.Find(p => p.ProductItem.Name == pcItem.CouponProduct.Name);
+                            if (orderItem == null)
+                            {
+                                return item.Quantity * item.ProductItem.UnitPrice;
+                            }
+                            else
+                            {
+                                counponOrderUnits.Add(pcItem, item);
+                                customerOrder.OrderItems.Remove(item);
+                            }
+                        }
+                        if (counponOrderUnits.Count > 0)
+                            return pc.CouponAmount;
+
                     }
 
                 }
