@@ -46,6 +46,18 @@ namespace PromotionEngine
             int order1Price = promoEngine.GetOrderTotal(order1);
             Console.WriteLine(100 == order1Price);
 
+
+            // Test 2
+            Order order2 = new Order();
+            items.Clear();
+            items.Add(new OrderItem() { ProductItem = A, Quantity = 5 });
+            items.Add(new OrderItem() { ProductItem = B, Quantity = 5 });
+            items.Add(new OrderItem() { ProductItem = C, Quantity = 1 });
+            order2.OrderItems = items;
+            int order2Price = promoEngine.GetOrderTotal(order1);
+            Console.WriteLine(370 == order2Price);
+
+
             Console.Read();
         }
     }
