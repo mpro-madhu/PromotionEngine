@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 namespace PromotionEngine.DomainObjects
 {
-    public class PromotionEngine
+    public class PromoEngine
     {
         List<ProductCoupon> _coupons = null;
-        public PromotionEngine( List<ProductCoupon> productCoupons)
+        public PromoEngine( List<ProductCoupon> productCoupons)
         {
             _coupons = productCoupons;
 

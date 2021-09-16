@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using PromotionEngine.DomainObjects;
 
 namespace PromotionEngine
@@ -31,10 +32,19 @@ namespace PromotionEngine
             ProductCouponItem couponDItem = new ProductCouponItem() { CouponProduct = D, CouponUnits = 1 };
             ProductCoupon couponCD = new ProductCoupon() { CouponItems = new System.Collections.Generic.List<ProductCouponItem>() { couponCItem,couponDItem }, CouponAmount = 45 };
 
+            // Promotion Engine
+            PromoEngine promoEngine = new PromoEngine(new List<ProductCoupon>() { couponA, couponB, couponCD });
+
 
             // Test 1
-
-
+            Order order1 = new Order();
+            List<OrderItem> items = new List<OrderItem>();
+            items.Add(new OrderItem() { ProductItem = A, Quantity = 1 });
+            items.Add(new OrderItem() { ProductItem = B, Quantity = 1 });
+            items.Add(new OrderItem() { ProductItem = C, Quantity = 1 });
+            order1.OrderItems = items;
+            int order1Price = promoEngine.GetOrderTotal(order1);
+            Console.WriteLine(100 == order1Price);
 
             Console.Read();
         }
