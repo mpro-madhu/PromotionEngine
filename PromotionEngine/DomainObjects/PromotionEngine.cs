@@ -43,13 +43,21 @@ namespace PromotionEngine.DomainObjects
             foreach (ProductCoupon pc in _coupons)
             {
                 ProductCouponItem productCouponItem = pc.CouponItems.Find(ci => ci.CouponProduct.Name == item.ProductItem.Name);
-                if (productCouponItem != null && pc.CouponItems.Count == 1 )
+                if (productCouponItem != null)   
                 {
-                    int couponUnitCount = item.Quantity / productCouponItem.CouponUnits;
-                    int nonCouponUnitCount = item.Quantity % productCouponItem.CouponUnits;
-                    return ((couponUnitCount * pc.CouponAmount) + (nonCouponUnitCount * item.ProductItem.UnitPrice)); 
+                    if (pc.CouponItems.Count == 1)
+                    {
+                        int couponUnitCount = item.Quantity / productCouponItem.CouponUnits;
+                        int nonCouponUnitCount = item.Quantity % productCouponItem.CouponUnits;
+                        return ((couponUnitCount * pc.CouponAmount) + (nonCouponUnitCount * item.ProductItem.UnitPrice));
+                    }
+                    else if (pc.CouponItems.Count > 1)
+                    {
+                        // TBD
+                    }
 
                 }
+                
 
             }
             return (item.Quantity * item.ProductItem.UnitPrice);

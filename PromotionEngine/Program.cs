@@ -8,7 +8,7 @@ namespace PromotionEngine
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Setting Up Products");
 
             // SET UP PRODUCTS
             Product A = new Product() { Name = "A", UnitPrice = 50};
@@ -16,6 +16,7 @@ namespace PromotionEngine
             Product C = new Product() { Name = "C", UnitPrice = 20 };
             Product D = new Product() { Name = "D", UnitPrice = 15 };
 
+            Console.WriteLine("Setting Up Promotions");
             // SET UP Promotions
 
             //Coupon for Product A
@@ -32,8 +33,10 @@ namespace PromotionEngine
             ProductCouponItem couponDItem = new ProductCouponItem() { CouponProduct = D, CouponUnits = 1 };
             ProductCoupon couponCD = new ProductCoupon() { CouponItems = new System.Collections.Generic.List<ProductCouponItem>() { couponCItem,couponDItem }, CouponAmount = 45 };
 
+            Console.WriteLine("Intiating Promotion Engine Component");
             // Promotion Engine
             PromoEngine promoEngine = new PromoEngine(new List<ProductCoupon>() { couponA, couponB, couponCD });
+
 
 
             // Test 1
@@ -44,6 +47,7 @@ namespace PromotionEngine
             items.Add(new OrderItem() { ProductItem = C, Quantity = 1 });
             order1.OrderItems = items;
             int order1Price = promoEngine.GetOrderTotal(order1);
+            Console.WriteLine("Testing Scenario 1 ");
             Console.WriteLine(100 == order1Price);
 
 
@@ -54,9 +58,22 @@ namespace PromotionEngine
             items.Add(new OrderItem() { ProductItem = B, Quantity = 5 });
             items.Add(new OrderItem() { ProductItem = C, Quantity = 1 });
             order2.OrderItems = items;
-            int order2Price = promoEngine.GetOrderTotal(order1);
+            int order2Price = promoEngine.GetOrderTotal(order2);
+            Console.WriteLine("Testing Scenario 2 ");
             Console.WriteLine(370 == order2Price);
 
+
+            //Test 3
+            Order order3 = new Order();
+            items.Clear();
+            items.Add(new OrderItem() { ProductItem = A, Quantity = 3 });
+            items.Add(new OrderItem() { ProductItem = B, Quantity = 5 });
+            items.Add(new OrderItem() { ProductItem = C, Quantity = 1 });
+            items.Add(new OrderItem() { ProductItem = D, Quantity = 1 });
+            order3.OrderItems = items;
+            int order3Price = promoEngine.GetOrderTotal(order3);
+            Console.WriteLine("Testing Scenario 3 ");
+            Console.WriteLine(280 == order3Price);
 
             Console.Read();
         }
