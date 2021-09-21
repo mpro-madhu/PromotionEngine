@@ -8,4 +8,7 @@
   <ItemGroup>
     <Folder Include="DomainObjects\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PromotionEngine.Domain\PromotionEngine.Domain.csproj" />
+  </ItemGroup>
 </Project>

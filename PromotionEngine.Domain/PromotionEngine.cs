@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-namespace PromotionEngine.DomainObjects
+namespace PromotionEngine.Domain
 {
     public class PromoEngine
     {

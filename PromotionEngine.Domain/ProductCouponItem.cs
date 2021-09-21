@@ -1,5 +1,5 @@
 ﻿using System;
-namespace PromotionEngine.DomainObjects
+namespace PromotionEngine.Domain
 {
     public class ProductCouponItem
     {
