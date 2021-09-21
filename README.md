@@ -8,3 +8,8 @@ Few pointers for next iteration of code changes.
 - Code clean up to removed classes that are not needed.
 - Introduce interfaces so dependency injection could be leveraged. Right now, objects are instantiated directly.
 - Introduce unit test framework.
+
+# Updates
+
+- Added new class library project and separated all classes from main executable.
+- Added unit tests.
